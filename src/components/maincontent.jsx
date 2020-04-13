@@ -13,20 +13,21 @@ class MainContent extends Component {
   }
 
   async grabData() {
-   const response = await fetch(`http://localhost:3000/images/`);
+   const response = await fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects`);
    const data = await response.json();
    return data;
   }
   
   render() {
    const {data} = this.state;
-   console.log(data)
+   console.log(data.objectIDs)
     return (
       <div>
-        <p>{data.map(art => {
+        <p>{data.objectIDs.map(art => {
             return (
-                <ul key={art.id}>
-        <Link to={`images/${art.id}`}><img src={art.worksimg}></img></Link>
+                <ul key={art}>
+        <li>{art.objectIDs}</li>
+        {/* <Link to={`images/${art.objectIDs}`}><img src={art.primaryImage}></img></Link> */}
                 </ul>
             )
         })}</p>

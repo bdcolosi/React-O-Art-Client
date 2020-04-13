@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import ArtDetail from "./components/artdetail";
 import MainContent from "./components/maincontent";
-import "./App.css";
+
 
 function App() {
   return (
