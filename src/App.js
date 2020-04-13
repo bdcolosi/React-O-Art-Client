@@ -7,10 +7,11 @@ import MainContent from "./components/maincontent";
 function App() {
   return (
     <div className="App">
-      <Router>
+      <MainContent/>
+      {/* <Router>
         <Route path="/" exact component={MainContent} />
         <Route path="/images/:art_id?" component={ArtDetail} />
-      </Router>
+      </Router> */}
     </div>
   );
 }

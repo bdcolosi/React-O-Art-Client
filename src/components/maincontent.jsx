@@ -13,24 +13,24 @@ class MainContent extends Component {
   }
 
   async grabData() {
-   const response = await fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects`);
+   const response = await fetch(`https://collectionapi.metmuseum.org/public/collection/v1/departments`);
    const data = await response.json();
-   return data;
+   return data.departments;
   }
   
   render() {
    const {data} = this.state;
-   console.log(data.objectIDs)
+   console.log(data)
     return (
       <div>
-        <p>{data.objectIDs.map(art => {
+        {data.map(art => {
             return (
                 <ul key={art}>
-        <li>{art.objectIDs}</li>
+        <li>{art.displayName}</li>
         {/* <Link to={`images/${art.objectIDs}`}><img src={art.primaryImage}></img></Link> */}
                 </ul>
             )
-        })}</p>
+        })}
       </div>
     );
   }
