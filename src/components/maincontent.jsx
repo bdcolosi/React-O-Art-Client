@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import ArtDetail from "./artdetail";
+import SearchBar from "./searchbar";
 
 class MainContent extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data: [],
+      textInput: "",
     };
   }
 
@@ -20,23 +22,25 @@ class MainContent extends Component {
       .then((data) => {
         this.setState(() => ({
           data: data.objectIDs,
-
-        }))
-
+          textInput: "",
+        }));
       });
   };
 
   render() {
-    let { data } = this.state;
+    let { data, textInput } = this.state;
 
     // console.log(data);
     return (
       <>
-        {data.map((item, index) => {
-          if(index < 500) {
-            return <ArtDetail objectID={item} key={item} />;
-          }
-        })}
+        <div>
+          <SearchBar value={textInput} data={data.title} />
+          {data.map((item, index) => {
+            if (index < 500) {
+              return <ArtDetail objectID={item} key={item} />;
+            }
+          })}
+        </div>
       </>
     );
   }
