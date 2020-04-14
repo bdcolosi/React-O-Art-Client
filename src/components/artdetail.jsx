@@ -1,36 +1,54 @@
-// import React, { Component } from "react";
+import React, {Component} from "react";
+import MainContent from "./maincontent";
 
-// class ArtDetail extends Component {
-//   state = {
-//     data: [],
-//   };
-//   componentDidMount() {
-//     const { object_id } = this.props.match.params;
-//     fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${object_id}`)
-//       .then((response) => response.json())
-//       .then((data) => {
-//         this.setState(() => ({ data: data }));
-//       });
-//   }
-//   render() {
-//       const {data} = this.state;
-//     return (
-//       <div>
-//         {/* {data.map(artdetail => {
-//             return(
-//                 <ul key={artdetail.objectID}>
-//                     <p>
-//                         <img src={artdetail.primaryImage}></img><br/>
-//                         {artdetail.title}, {artdetail.objectName}, {artdetail.culture}<br/>
-//                         {artdetail.period}<br/>
-//                         {artdetail.dynasty}<br/>
-//                     </p>
-//                 </ul>
-//             )
-//         })} */}
-//       </div>
-//     );
-//   }
-// }
+ class ArtDetail extends Component {
+   constructor(props) {
+     super(props);
+     this.state = {
+       data: []
+     }
+     
+   };
+  
+  objectID = this.props.objectID
+  
+  
+  async componentDidMount() {
+   let itemData = await this.getitemData(this.objectID)
+   this.setState({
+     data: itemData
+   });
+  };
 
-// export default ArtDetail;
+  
+
+
+
+   getitemData = async (objectID) => {
+    
+    let response = await fetch(
+      `https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`
+    )
+    let data = await response.json();
+    return data
+      
+  };
+
+  
+
+  render() {
+    console.log(this.state.data)
+    return (
+      <div>
+         {/* {itemData.primaryImage} */}
+      </div>
+    );
+
+  }
+
+
+  
+};
+
+export default ArtDetail;
+

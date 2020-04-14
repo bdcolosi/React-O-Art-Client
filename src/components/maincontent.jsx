@@ -1,37 +1,43 @@
 import React, { Component } from "react";
-import {Link} from "react-router-dom";
+import ArtDetail from "./artdetail";
 
 class MainContent extends Component {
-  state = {
-    data: [],
-  };
- async componentDidMount() {
-    const artData = await this.grabData()
-      this.setState({
-          data: artData
-      })
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+    };
   }
 
-  async grabData() {
-   const response = await fetch(`https://collectionapi.metmuseum.org/public/collection/v1/departments`);
-   const data = await response.json();
-   return data.departments;
+  componentDidMount() {
+    this.theMetData();
   }
-  
+  theMetData = () => {
+    fetch(
+      `https://collectionapi.metmuseum.org/public/collection/v1/objects?metadataDate=2018-10-22&departmentIds=10`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState(() => ({
+          data: data.objectIDs,
+
+        }))
+
+      });
+  };
+
   render() {
-   const {data} = this.state;
-   console.log(data)
+    let { data } = this.state;
+
+    // console.log(data);
     return (
-      <div>
-        {data.map(art => {
-            return (
-                <ul key={art}>
-        <li>{art.displayName}</li>
-        {/* <Link to={`images/${art.objectIDs}`}><img src={art.primaryImage}></img></Link> */}
-                </ul>
-            )
+      <>
+        {data.map((item, index) => {
+          if(index < 500) {
+            return <ArtDetail objectID={item} key={item} />;
+          }
         })}
-      </div>
+      </>
     );
   }
 }
