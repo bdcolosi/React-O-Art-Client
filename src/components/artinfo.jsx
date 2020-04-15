@@ -8,7 +8,7 @@ class ArtInfo extends Component {
       };
     }
   
-    objectID = this.props.match.objectID;
+    // objectID = this.props.match.objectID;
   
     async componentDidMount() {
         const {
@@ -37,7 +37,7 @@ class ArtInfo extends Component {
       return (
         <section>
           <img src={data.primaryImage} width="300" height="225" alt=""></img>
-          <p>{data.title}</p>
+          <p>{data.title}, {data.period}, {data.dynasty} {data.objectDate} {data.medium}, {data.dimensions} </p>
         </section>
       );
     }

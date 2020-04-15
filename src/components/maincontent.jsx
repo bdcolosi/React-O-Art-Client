@@ -55,7 +55,7 @@ class MainContent extends Component {
           <SearchBar value={textInput} data={data.title} />
 
           {data.map((item, index) => {
-            if (index < 500) {
+            if (index < 100) {
               return <ArtDetail objectID={item} key={item}/>;
             }
           })}

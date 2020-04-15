@@ -9,7 +9,7 @@ function App() {
     <div className="App">
       <Router>
         <Route path='/' exact component={MainContent}/>
-        <Route path='/:objectID?' exact component={ArtInfo}/>
+        <Route path='/:objectID' exact component={ArtInfo}/>
       </Router>
       
     </div>
