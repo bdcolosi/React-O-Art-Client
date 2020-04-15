@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 class ArtDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: []
+      data: [],
     };
   }
 
@@ -18,8 +18,6 @@ class ArtDetail extends Component {
     });
   }
 
-  
-
   getitemData = async (objectID) => {
     let response = await fetch(
       `https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`
@@ -30,14 +28,14 @@ class ArtDetail extends Component {
 
   render() {
     const data = this.state.data;
-    const objectID = this.props.objectID
-    
-    return (
-      <section>
+    const objectID = this.props.objectID;
 
-        <Link to={`/${objectID}`}><img src={data.primaryImage} width="300" height="225" alt=""></img></Link>
-        <p>{data.title}</p>
-      </section>
+    return (
+      <>
+        <Link to={`/${objectID}`}>
+    <img src={data.primaryImage} width="300" height="225" alt=""></img>
+        </Link>
+      </>
     );
   }
 }

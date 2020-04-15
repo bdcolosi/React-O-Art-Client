@@ -6,7 +6,7 @@ class SearchBox extends Component {
     super(props);
     this.state = {
       data: [],
-      textInput: "",
+      textInput: ''
     };
   }
 
@@ -20,7 +20,7 @@ class SearchBox extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.theMetData();
+    this.getItemData();
   };
 
   render() {

@@ -3,7 +3,6 @@ import ArtDetail from "./artdetail";
 import SearchBar from "./searchbar";
 // import ArtInfo from './artinfo';
 
-
 class MainContent extends Component {
   constructor(props) {
     super(props);
@@ -27,40 +26,39 @@ class MainContent extends Component {
         this.setState(() => ({
           data: data.objectIDs,
           textInput: "",
-          filteredData: data
+          filteredData: data,
         }));
       });
   };
 
   getfilterData = (imageFilter) => {
-    let filteredData = this.state.data
+    let filteredData = this.state.data;
     filteredData = filteredData.filter((data) => {
-      let getImageOnly = data.primaryImage
-      return getImageOnly.indexOf(
-        imageFilter !== -1
-      )
-    })
+      let getImageOnly = data.primaryImage;
+      return getImageOnly.indexOf(imageFilter !== -1);
+    });
+
     this.setState({
-      filteredData
-    })
-  }
+      filteredData,
+    });
+    console.log(filteredData);
+  };
 
   render() {
-    let { data, textInput, fileredData } = this.state;
+    let { data, textInput } = this.state;
 
     // console.log(data);
     return (
       <>
-        <div>
+        <>
           <SearchBar value={textInput} data={data.title} />
+          <br/>
 
           {data.map((item, index) => {
-            if (index < 100) {
-              return <ArtDetail objectID={item} key={item}/>;
-            }
+            if (index < 80 && item.primaryImage != " ")
+              return <ArtDetail objectID={item} key={item} />;
           })}
-          
-        </div>
+        </>
       </>
     );
   }
