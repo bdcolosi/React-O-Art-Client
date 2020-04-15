@@ -11,12 +11,16 @@ class ArtInfo extends Component {
     objectID = this.props.match.objectID;
   
     async componentDidMount() {
-      let itemData = await this.getitemData(this.objectID);
-      this.setState({
-        data: itemData,
-      });
-    }
-  
+        const {
+          match: { params },
+        } = this.props;
+        let objectID = params.objectID;
+        console.log("objectID: ", objectID);
+        let itemData = await this.getitemData(objectID);
+        this.setState({
+          data: itemData,
+        });
+      }
     
   
     getitemData = async (objectID) => {
@@ -32,7 +36,7 @@ class ArtInfo extends Component {
       console.log(data)
       return (
         <section>
-          <img src={data.primaryImage} width="300" height="225"></img>
+          <img src={data.primaryImage} width="300" height="225" alt=""></img>
           <p>{data.title}</p>
         </section>
       );

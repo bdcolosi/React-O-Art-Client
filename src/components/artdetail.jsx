@@ -35,7 +35,7 @@ class ArtDetail extends Component {
     return (
       <section>
 
-        <Link to={`objects/${objectID}`}><img src={data.primaryImage} width="300" height="225"></img></Link>
+        <Link to={`/${objectID}`}><img src={data.primaryImage} width="300" height="225" alt=""></img></Link>
         <p>{data.title}</p>
       </section>
     );
