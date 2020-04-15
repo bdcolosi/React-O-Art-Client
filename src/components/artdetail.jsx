@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+import {Link} from 'react-router-dom'
 
 class ArtDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
+      data: []
     };
   }
 
@@ -17,6 +18,8 @@ class ArtDetail extends Component {
     });
   }
 
+  
+
   getitemData = async (objectID) => {
     let response = await fetch(
       `https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`
@@ -27,10 +30,12 @@ class ArtDetail extends Component {
 
   render() {
     const data = this.state.data;
-
+    const objectID = this.props.objectID
+    
     return (
       <section>
-        <img src={data.primaryImage} width="300" height="225"></img>
+
+        <Link to={`objects/${objectID}`}><img src={data.primaryImage} width="300" height="225"></img></Link>
         <p>{data.title}</p>
       </section>
     );

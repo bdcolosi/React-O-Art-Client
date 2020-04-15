@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import ArtDetail from "./artdetail";
 import SearchBar from "./searchbar";
+// import ArtInfo from './artinfo';
+
 
 class MainContent extends Component {
   constructor(props) {
@@ -8,12 +10,14 @@ class MainContent extends Component {
     this.state = {
       data: [],
       textInput: "",
+      fileredData: [],
     };
   }
 
   componentDidMount() {
     this.theMetData();
   }
+
   theMetData = () => {
     fetch(
       `https://collectionapi.metmuseum.org/public/collection/v1/objects?metadataDate=2018-10-22&departmentIds=10`
@@ -23,23 +27,39 @@ class MainContent extends Component {
         this.setState(() => ({
           data: data.objectIDs,
           textInput: "",
+          filteredData: data
         }));
       });
   };
 
+  getfilterData = (imageFilter) => {
+    let filteredData = this.state.data
+    filteredData = filteredData.filter((data) => {
+      let getImageOnly = data.primaryImage
+      return getImageOnly.indexOf(
+        imageFilter !== -1
+      )
+    })
+    this.setState({
+      filteredData
+    })
+  }
+
   render() {
-    let { data, textInput } = this.state;
+    let { data, textInput, fileredData } = this.state;
 
     // console.log(data);
     return (
       <>
         <div>
           <SearchBar value={textInput} data={data.title} />
+
           {data.map((item, index) => {
             if (index < 500) {
-              return <ArtDetail objectID={item} key={item} />;
+              return <ArtDetail objectID={item} key={item}/>;
             }
           })}
+          
         </div>
       </>
     );
