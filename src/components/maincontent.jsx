@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import ArtDetail from "./artdetail";
 import SearchBar from "./searchbar";
-// import ArtInfo from './artinfo';
+import StackGrid, { transitions } from "react-stack-grid";
+import sizeMe from "react-sizeme";
+
+const { scaleDown } = transitions;
 
 class MainContent extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data: [],
-      textInput: "",
-      fileredData: [],
+      searchValue: " ",
     };
   }
 
@@ -26,42 +28,56 @@ class MainContent extends Component {
         this.setState(() => ({
           data: data.objectIDs,
           textInput: "",
-          filteredData: data,
+          searchValue: data.objectIDs,
         }));
       });
   };
 
-  getfilterData = (imageFilter) => {
-    let filteredData = this.state.data;
-    filteredData = filteredData.filter((data) => {
-      let getImageOnly = data.primaryImage;
-      return getImageOnly.indexOf(imageFilter !== -1);
-    });
-
-    this.setState({
-      filteredData,
-    });
-    console.log(filteredData);
+  searchData = (value) => {
+    this.theMetData(this.searchValue);
+    fetch(
+      `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${value}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState(() => ({
+          data: data.objectIDs,
+          searchValue: value,
+        }));
+      });
   };
 
   render() {
-    let { data, textInput } = this.state;
+    let { data, searchValue } = this.state;
+    const {
+      size: { width },
+    } = this.props;
 
-    // console.log(data);
     return (
       <>
-        <>
-          <SearchBar value={textInput} data={data.title} />
-          <br/>
-
+        <header>The Met's Collection</header>
+        <h1>
+          <SearchBar searchFunction={this.searchData} />
+        </h1>
+        <StackGrid
+          columnWidth={width <= 768 ? "100%" : "33.33%"}
+          appear={scaleDown.appear}
+          appeared={scaleDown.appeared}
+          enter={scaleDown.enter}
+          entered={scaleDown.entered}
+          leaved={scaleDown.leaved}
+        >
           {data.map((item, index) => {
-            if (index < 80 && item.primaryImage != " ")
+            if (index < 80 && item.primaryImage !== " ") {
               return <ArtDetail objectID={item} key={item} />;
+            } else {
+              return null;
+            }
           })}
-        </>
+        </StackGrid>
       </>
     );
   }
 }
 
-export default MainContent;
+export default sizeMe()(MainContent);

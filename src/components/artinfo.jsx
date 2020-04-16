@@ -35,11 +35,13 @@ class ArtInfo extends Component {
     console.log(data);
     return (
       <>
-        <img src={data.primaryImage} width="300" height="225" alt=""></img>
-        <>
+        <img src={data.primaryImageSmall} alt=""></img>
+
+        <br/>
+        
           {data.title}, {data.period}, {data.dynasty} {data.objectDate}{" "}
           {data.medium}, {data.dimensions}{" "}
-        </>
+        
       </>
     );
   }

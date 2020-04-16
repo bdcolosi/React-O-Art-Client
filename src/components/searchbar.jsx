@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import ReactSearchBox from "react-search-box";
+// import ReactSearchBox from "react-search-box";
+
 
 class SearchBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
-      textInput: ''
+      textInput: "",
     };
   }
 
@@ -20,23 +20,21 @@ class SearchBox extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.getItemData();
+    this.props.searchFunction(this.state.textInput);
   };
 
   render() {
-    let data = this.state.data;
     let textInput = this.state.textInput;
     return (
       <>
-        <form onSubmit={this.handleSubmit}></form>
-        <ReactSearchBox
+        <form onSubmit={this.handleSubmit}>
+        <input
           type="text"
           value={textInput}
-          data={data.title}
-          callback={(record) => console.log(record)}
           onChange={this.handleChange}
         />
         <button type="submit">Search</button>
+        </form>
       </>
     );
   }
