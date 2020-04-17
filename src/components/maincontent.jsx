@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import ArtDetail from "./artdetail";
 import SearchBar from "./searchbar";
-import StackGrid, { transitions } from "react-stack-grid";
-import sizeMe from "react-sizeme";
-
-const { scaleDown } = transitions;
 
 class MainContent extends Component {
   constructor(props) {
@@ -49,35 +45,26 @@ class MainContent extends Component {
 
   render() {
     let { data, searchValue } = this.state;
-    const {
-      size: { width },
-    } = this.props;
 
     return (
       <>
-        <header>The Met's Collection</header>
-        <h1>
+      <h1>The Met</h1> <br/>
+        <div>
           <SearchBar searchFunction={this.searchData} />
-        </h1>
-        <StackGrid
-          columnWidth={width <= 768 ? "100%" : "33.33%"}
-          appear={scaleDown.appear}
-          appeared={scaleDown.appeared}
-          enter={scaleDown.enter}
-          entered={scaleDown.entered}
-          leaved={scaleDown.leaved}
-        >
-          {data.map((item, index) => {
-            if (index < 80 && item.primaryImage !== " ") {
-              return <ArtDetail objectID={item} key={item} />;
-            } else {
-              return null;
-            }
-          })}
-        </StackGrid>
+        </div>
+        <br />
+      <div>
+        {data.map((item, index) => {
+          if (index < 80 && item.primaryImage !== " ") {
+            return <ArtDetail objectID={item} key={item} />;
+          } else {
+            return null;
+          }
+        })}
+        </div>
       </>
     );
   }
 }
 
-export default sizeMe()(MainContent);
+export default MainContent;

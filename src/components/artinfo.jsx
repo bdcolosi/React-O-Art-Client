@@ -37,11 +37,13 @@ class ArtInfo extends Component {
       <>
         <img src={data.primaryImageSmall} alt=""></img>
 
-        <br/>
-        
-          {data.title}, {data.period}, {data.dynasty} {data.objectDate}{" "}
-          {data.medium}, {data.dimensions}{" "}
-        
+        <br />
+
+        <h1>{data.title}</h1>
+        <h2>
+          {data.period}, {data.dynasty} {data.objectDate} {data.medium},{" "}
+          {data.dimensions}{" "}
+        </h2>
       </>
     );
   }

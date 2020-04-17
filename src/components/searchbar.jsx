@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-// import ReactSearchBox from "react-search-box";
-
 
 class SearchBox extends Component {
   constructor(props) {
@@ -28,12 +26,8 @@ class SearchBox extends Component {
     return (
       <>
         <form onSubmit={this.handleSubmit}>
-        <input
-          type="text"
-          value={textInput}
-          onChange={this.handleChange}
-        />
-        <button type="submit">Search</button>
+          <input type="text" value={textInput} onChange={this.handleChange} />
+          <button type="submit">Search</button>
         </form>
       </>
     );

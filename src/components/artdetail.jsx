@@ -33,7 +33,7 @@ class ArtDetail extends Component {
     return (
       <>
         <Link to={`/${objectID}`}>
-    <img src={data.primaryImageSmall} alt=""></img>
+          <img src={data.primaryImageSmall} alt=""></img>
         </Link>
       </>
     );

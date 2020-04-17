@@ -4,8 +4,12 @@ import MainContent from "./components/maincontent";
 import ArtInfo from "./components/artinfo";
 
 
+
+
+
 function App() {
   return (
+    <>
     
     <div className="App">
       <Router>
@@ -13,6 +17,9 @@ function App() {
         <Route path="/:objectID" exact component={ArtInfo} />
       </Router>
     </div>
+    
+  
+  </>
     
   );
 }
